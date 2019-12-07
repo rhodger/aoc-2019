@@ -22,7 +22,9 @@ fn main() {
                           .get_matches();
     
     if matches.value_of("PUZZLE").unwrap() == "01"{
-        let path: &str = matches.value_of("FILE").unwrap_or("./content/input011.txt");
+        let path: &str = matches
+          .value_of("FILE")
+          .unwrap_or("./content/input011.txt");
         print!("Fuel needed: {}\n\n", puzzle01::calculate_fuel(path));
     }else{
         print!("Didn't work :(\n");

@@ -25,14 +25,25 @@ fn fuel_for(x: u64) -> u64{
 pub fn calculate_fuel(path: &str) -> u64{
     let mut input = File::open(path).expect("Failed to open input file");
     let mut input_buffer = String::new();
-    input.read_to_string(&mut input_buffer).expect("Failed to read from input file");
+    input
+      .read_to_string(&mut input_buffer)
+      .expect("Failed to read from input file");
     let mut total: u64 = 0;
     for i in Regex::new(r"\s+").unwrap().split(&input_buffer[..]){
-        let unprocessed: u64 = i.to_string().parse().expect("Unable to parse int from string");
+        let unprocessed: u64 = i
+          .to_string()
+          .parse()
+          .expect("Unable to parse int from string");
         let processed: u64 = process(unprocessed);
         let additional: u64 = fuel_for(processed);
         total = total + processed + additional;
-        //print!("{} -> {} + {} : {}\n", unprocessed, processed, additional, total);
+        //print!(
+        //  "{} -> {} + {} : {}\n",
+        //  unprocessed,
+        //  processed,
+        //  additional,
+        //  total
+        //);
     }
     //print!("Final result: {}\n\n", total);
     return total;
