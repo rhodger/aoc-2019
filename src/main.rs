@@ -1,3 +1,5 @@
+mod puzzle01;
+
 fn main() {
-    println!("Hello, world!");
+    print!("Final result: {}\n\n", puzzle01::calculate_fuel("./content/input011.txt"));
 }
