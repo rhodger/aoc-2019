@@ -2,6 +2,7 @@ use std::env;
 use clap::*;
 
 mod puzzle01;
+mod puzzle02;
 
 fn main() {
     let matches = App::new("aoc-2019")
@@ -26,6 +27,8 @@ fn main() {
           .value_of("FILE")
           .unwrap_or("./content/input011.txt");
         print!("Fuel needed: {}\n\n", puzzle01::calculate_fuel(path));
+    }else if matches.value_of("PUZZLE").unwrap() == "02"{
+        print!("{}\n", puzzle02::puzzle021("./content/input021.txt"));
     }else{
         print!("Didn't work :(\n");
     }
