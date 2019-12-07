@@ -47,25 +47,3 @@ pub fn puzzle021(path: &str) -> u64{
     vec = execute(vec);
     return vec[0 as usize];
 }
-
-pub fn puzzle022(path: &str, target: u64) -> u64{
-    let data: &str = &open_file(path)[..];
-    let mut vec: Vec<u64> = Vec::new();
-    for i in Regex::new(r",").unwrap().split(data){
-        vec.push(i.parse::<u64>().expect("Failed to parse string"));
-    }
-    let mut n: u64 = 0;
-    let mut v: u64 = 0;
-    for i in 0..100{
-        for j in 0..100{
-            vec[1 as usize] = i;
-            vec[2 as usize] = j;
-            vec = execute(vec);
-            if vec[0 as usize] == target{
-                n = i;
-                v = j;
-            }
-        }
-    }
-    return (vec[0 as usize] * 100) + vec[1 as usize];
-}
