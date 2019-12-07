@@ -1,5 +1,6 @@
 mod puzzle01;
+mod puzzle02;
 
 fn main() {
-    print!("Final result: {}\n\n", puzzle01::calculate_fuel("./content/input011.txt"));
+    puzzle02::puzzle021("./content/input021.txt");
 }
