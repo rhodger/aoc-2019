@@ -8,6 +8,7 @@ Advent of Code is an Advent calendar of small programming puzzles for a variety 
 aoc-2019 [OPTIONS] <puzzle>
 ```
 Where puzzle is a 3 digit indicator of which solution to run (i.e. `021` = puzzle 2 day 1).
+The `-p` flag can be used to set a custom input file, otherwise the default one provided by aoc will be used.
 
 ## Optimisation
 There is none. Do not look for it, you will be dissappointed.
