@@ -22,14 +22,18 @@ fn execute(mut data: Vec<u64>) -> Vec<u64>{
             let x: u64 = data[(i + 1) as usize];
             let y: u64 = data[(i + 2) as usize];
             let z: u64 = data[(i + 3) as usize];
-            print!("{}({}) = {} + {}\n", z, data[z as usize], data[x as usize], data[y as usize]);
-            data[z as usize] = data[x as usize] + data[y as usize];
+            if (x < data.len() as u64) && (y < data.len() as u64) && (z < data.len() as u64){
+                // print!("{}({}) = {} + {}\n", z, data[z as usize], data[x as usize], data[y as usize]);
+                data[z as usize] = data[x as usize] + data[y as usize];
+            }
         }else if data[i as usize] == 2{
             let x: u64 = data[(i + 1) as usize];
             let y: u64 = data[(i + 2) as usize];
             let z: u64 = data[(i + 3) as usize];
-            print!("{}({}) = {} * {}\n", z, data[z as usize], data[x as usize], data[y as usize]);
-            data[z as usize] = data[x as usize] * data[y as usize];
+            if (x < data.len() as u64) && (y < data.len() as u64) && (z < data.len() as u64){
+                // print!("{}({}) = {} * {}\n", z, data[z as usize], data[x as usize], data[y as usize]);
+                data[z as usize] = data[x as usize] * data[y as usize];
+            }
         }else if data[i as usize] == 99{
             i = data.len() as u16;
         }
@@ -46,4 +50,32 @@ pub fn puzzle021(path: &str) -> u64{
     }
     vec = execute(vec);
     return vec[0 as usize];
+}
+
+pub fn puzzle022(path: &str, target: u64) -> u64{
+    let mut n: u64 = 0;
+    let mut v: u64 = 0;
+    for i in 0..100{
+        for j in 0..100{
+            print!("{} + {} ", i, j);
+            let mut data = &open_file(path)[..];
+            let mut vec = Vec::new();
+            for i in Regex::new(r",").unwrap().split(data){
+                vec.push(i.parse::<u64>().expect("Failed to parse string"));
+            }
+            print!(".");
+            vec[1 as usize] = i;
+            vec[2 as usize] = j;
+            vec = execute(vec);
+            print!(".");
+            if vec[0 as usize] as u64 == target{
+                n = i;
+                v = j;
+                print!("!");
+            }
+            print!(".Done\n");
+        }
+    }
+    print!("{} + {}\n", n, v);
+    return n * 100 + v;
 }
