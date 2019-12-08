@@ -5,7 +5,8 @@ use regex::Regex;
 fn open_file(path: &str) -> String{
     let mut input = File::open(path).expect("Failed to open input file");
     let mut input_buffer = String::new();
-    input.read_to_string(&mut input_buffer).expect("Failed to read from input file");
+    input.read_to_string(&mut input_buffer)
+      .expect("Failed to read from input file");
     return input_buffer;
 }
 
@@ -22,16 +23,22 @@ fn execute(mut data: Vec<u64>) -> Vec<u64>{
             let x: u64 = data[(i + 1) as usize];
             let y: u64 = data[(i + 2) as usize];
             let z: u64 = data[(i + 3) as usize];
-            if (x < data.len() as u64) && (y < data.len() as u64) && (z < data.len() as u64){
-                // print!("{}({}) = {} + {}\n", z, data[z as usize], data[x as usize], data[y as usize]);
+            if (x < data.len() as u64)
+              && (y < data.len() as u64)
+              && (z < data.len() as u64){
+                // print!("{}({}) = {} + {}\n", z, data[z as usize],
+                //   data[x as usize], data[y as usize]);
                 data[z as usize] = data[x as usize] + data[y as usize];
             }
         }else if data[i as usize] == 2{
             let x: u64 = data[(i + 1) as usize];
             let y: u64 = data[(i + 2) as usize];
             let z: u64 = data[(i + 3) as usize];
-            if (x < data.len() as u64) && (y < data.len() as u64) && (z < data.len() as u64){
-                // print!("{}({}) = {} * {}\n", z, data[z as usize], data[x as usize], data[y as usize]);
+            if (x < data.len() as u64)
+              && (y < data.len() as u64)
+              && (z < data.len() as u64){
+                // print!("{}({}) = {} * {}\n", z, data[z as usize],
+                //   data[x as usize], data[y as usize]);
                 data[z as usize] = data[x as usize] * data[y as usize];
             }
         }else if data[i as usize] == 99{
