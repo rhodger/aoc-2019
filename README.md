@@ -1,7 +1,7 @@
 # aoc-2019
 > Advent of Code 2019 Entry by SuedeGently
 
-Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like.
+Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. This is a repo of solutions for as many as I have time for written entirely in Rust as practice coding.
 
 ## Usage
 ```bash
