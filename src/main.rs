@@ -4,6 +4,7 @@ use clap::*;
 mod puzzle01;
 mod puzzle02;
 
+/// Handles command-line arguments
 fn main() {
     let matches = App::new("aoc-2019")
                           .version("0.2")
