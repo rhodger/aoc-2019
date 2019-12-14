@@ -1,30 +1,34 @@
 pub enum Movement{
-    right(i64),
-    left(i64),
-    up(u64),
-    down(u64)
+    Right(i64),
+    Left(i64),
+    Up(u64),
+    Down(u64)
 }
 
 pub struct Grid{
     wires: Vec<i64>,
-    currentPos: Vec<i64>
+    current_pos: Vec<i64>
 }
 
 impl Grid{
-    pub fn Grid() -> Grid{
+    pub fn grid() -> Grid{
         let grid: Grid = Grid{
             wires: vec![0;0],
-            currentPos: vec![0; 2]
+            current_pos: vec![0; 2]
         };
         return grid;
     }
 
+    pub fn get_pos(&self) -> Vec<i64>{
+        return vec![self.current_pos[0], self.current_pos[1]];
+    }
+
     pub fn move_wire(movement: Movement){
         match movement{
-            Movement::right(distance) => println!("Distance: {}\n", distance),
-            Movement::left(distance) => println!("Distance: {}\n", distance),
-            Movement::up(distance) => println!("Distance: {}\n", distance),
-            Movement::down(distance) => println!("Distance: {}\n", distance)
+            Movement::Right(distance) => println!("Distance: {}\n", distance),
+            Movement::Left(distance) => println!("Distance: {}\n", distance),
+            Movement::Up(distance) => println!("Distance: {}\n", distance),
+            Movement::Down(distance) => println!("Distance: {}\n", distance)
         }
     }
         
