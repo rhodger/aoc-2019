@@ -39,7 +39,8 @@ fn fuel_for(x: u64) -> u64{
     return total;
 }
 
-/// This function returns the amount of fuel required for a 'spacecraft' made up of many 'modules'.
+/// This function returns the amount of fuel required for a 'spacecraft' made up
+/// of many 'modules'.
 /// 
 /// The string passed to this function must be a text file containing a list of
 /// newline-separated values representing the weights of the various components
