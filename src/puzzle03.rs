@@ -1,3 +1,7 @@
+use std::fs::File;
+use std::io::prelude::*;
+use regex::Regex;
+
 pub enum Movement{
     Right(i64),
     Left(i64),
@@ -8,6 +12,28 @@ pub enum Movement{
 pub struct Grid{
     wires: Vec<i64>,
     current_pos: Vec<i64>
+}
+
+pub fn largestValue(path: &str) -> i64{
+    let mut input = File::open(path).expect("largestValue failed to open input file");
+    let mut input_buffer = String::new();
+    let mut largest: i64 = 0;
+
+    input
+      .read_to_string(&mut input_buffer)
+      .expect("Failed to read from input file");
+    
+    for i in Regex::new(r"\d+").unwrap().captures_iter(&input_buffer[..]){
+        for j in i[0].lines(){
+            let value: i64 = j.parse::<i64>()
+              .expect("Failed converting &str to int in largestValue()");
+            if value > largest{
+                largest = value;
+            }
+        }
+    }
+
+    return largest;
 }
 
 impl Grid{
@@ -31,6 +57,4 @@ impl Grid{
             Movement::Down(distance) => println!("Distance: {}\n", distance)
         }
     }
-        
-    
 }
