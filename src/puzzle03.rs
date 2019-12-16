@@ -98,6 +98,13 @@ impl Grid{
         }
     }
 
+    fn execute_test(&mut self, instructions1: &str, instructions2: &str){
+        let j = Regex::new(r"\w\d+").unwrap().captures_iter(&instructions);
+        for j in Regex::new(r"\w\d+").unwrap().captures_iter(&instructions){
+            println!("{:?}", j[0].lines().next());
+        }
+    }
+
     fn compare(grid1: &Grid, grid2: &Grid) -> i64{
         let mut best: i64 = 0;
         for i in &grid1.wires{
@@ -126,9 +133,9 @@ impl Grid{
         let mut wire2: &str = wire_instructions.next().unwrap();
 
         println!("Building first wire...");
-        grid1.execute(wire1);
+        grid1.execute_test(wire1);
         println!("Building second wire...");
-        grid2.execute(wire2);
+        grid2.execute_test(wire2);
 
         println!("Finding best match...");
         println!("Best match is {}", Grid::compare(grid1, grid2));
