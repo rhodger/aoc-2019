@@ -2,5 +2,6 @@ mod puzzle03;
 
 /// Handles command-line arguments
 fn main() {
-    println!("{}", puzzle03::largestValue("./content/input031.txt"));
+    let mut grid: puzzle03::Grid = puzzle03::Grid::grid();
+    grid.execute("./content/input031.txt");
 }
