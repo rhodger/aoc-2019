@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Movement","Types of movement"]],"fn":[["largestValue","Finds the largest integer in a string."],["puzzle1","Runs the solution for the first puzzle."],["puzzle2","Runs the solution for the second puzzle."]],"struct":[["Grid","Structure for holding the positions of a wire"]]});
