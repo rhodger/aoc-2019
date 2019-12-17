@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["display","Prints a vector containing u64s."],["execute","Computes the intcode passed to it as a vector and returns the computed vector."],["open_file","Opens a file at a given path and returns the contents."],["puzzle021","Solves the first version of puzzle 02"],["puzzle022","Solves the second version of puzzle 02"]]});

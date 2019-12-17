@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["calculate_fuel","This function returns the amount of fuel required for a 'spacecraft' made up of many 'modules'."],["fuel_for","Returns the fuel required for the fuel of an object."],["process","Returns the fuel required for an object."]]});
