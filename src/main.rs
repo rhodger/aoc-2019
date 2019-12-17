@@ -43,7 +43,12 @@ fn main() {
         let path: &str = matches
           .value_of("FILE")
           .unwrap_or("./content/input031.txt");
-        print!("{}\n", puzzle02::puzzle022(path, 19690720));
+        print!("{}\n", puzzle03::puzzle1(path));
+    }else if matches.value_of("PUZZLE").unwrap() == "032"{
+      let path: &str = matches
+        .value_of("FILE")
+        .unwrap_or("./content/input031.txt");
+      print!("{}\n", puzzle03::puzzle2(path));
     }else{
         print!("Didn't work :(\n");
     }
