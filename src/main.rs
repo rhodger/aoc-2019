@@ -3,6 +3,7 @@ use clap::*;
 mod puzzle01;
 mod puzzle02;
 mod puzzle03;
+mod puzzle04;
 
 /// Handles command-line arguments
 fn main() {
@@ -50,6 +51,7 @@ fn main() {
         .unwrap_or("./content/input031.txt");
       print!("{}\n", puzzle03::puzzle2(path));
     }else{
-        print!("Didn't work :(\n");
+        // Debug for puzzle 04
+        puzzle04::puzzle04(0,10);
     }
 }
