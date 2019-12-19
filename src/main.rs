@@ -73,8 +73,18 @@ fn main() {
       }
 
       println!("{}", puzzle04::puzzle01(lower_bound, higher_bound));
-    }else{
-        // Debug for puzzle 04
-        println!("{}", puzzle04::puzzle02(165432,707912));
+    }else if matches.value_of("PUZZLE").unwrap() == "042"{
+      let lower_bound: u64 = matches.value_of("LOWBOUND").unwrap_or("111111").parse::<u64>().unwrap();
+      let higher_bound: u64 = matches.value_of("HIGHBOUND").unwrap_or("999999").parse::<u64>().unwrap();
+
+      if lower_bound == 111111{
+        println!("Lower bound defaulting to 111111");
+      }
+
+      if higher_bound == 999999{
+        println!("Higher bound defaulting to 999999");
+      }
+
+      println!("{}", puzzle04::puzzle02(lower_bound, higher_bound));
     }
 }
