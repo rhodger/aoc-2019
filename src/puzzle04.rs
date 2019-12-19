@@ -2,6 +2,34 @@
 
 use regex::Regex;
 
+#[cfg(test)]
+mod tests{
+    use super::*;
+
+    #[test]
+    fn test_to_array(){
+        let x: u64 = 123456;
+        let expected: [u64; 6] = [1,2,3,4,5,6];
+
+        assert_eq!(to_array(x), expected);
+    }
+
+    #[test]
+    fn test_valid(){
+        assert_eq!(valid([1,1,1,1,1,1]), true);
+        assert_eq!(valid([2,2,3,4,5,0]), false);
+        assert_eq!(valid([1,2,3,7,8,9]), false);
+    }
+
+    #[test]
+    fn test_valid2(){
+        assert_eq!(valid2([1,1,2,2,3,3]), true);
+        assert_eq!(valid2([1,2,3,4,4,4]), false);
+        assert_eq!(valid2([1,1,1,1,2,2]), true);
+        assert_eq!(valid2([1,6,6,6,6,7]), false);
+    }
+}
+
 /// Converts an integer into an array
 ///
 /// Converts the 6 character integer x into an array of 6 integers, each of
@@ -67,6 +95,48 @@ fn valid(x: [u64; 6]) -> bool{
     return false;
 }
 
+fn valid2(x: [u64; 6]) -> bool{
+    let mut repetition: bool = false;
+    let mut ordered: bool = true;
+
+    if x[0 as usize] > x[1 as usize]{
+        ordered = false;
+    }else if x[0 as usize] == x[1 as usize]{
+        if x[0 as usize] != x[2 as usize]{
+            repetition = true;
+        }
+    }
+
+    if ordered{
+        for i in 1..4{
+            if x[i as usize] > x[(i + 1) as usize]{
+                ordered = false;
+            }else if x[i as usize] == x[(i + 1) as usize]{
+                if x[i as usize] != x[(i + 2) as usize]
+                && x[i as usize] != x[(i - 1) as usize]{
+                    repetition = true;
+                }
+            }
+        }
+    }
+
+    if ordered{
+        if x[4 as usize] > x[5 as usize]{
+            ordered = false;
+        }else if !repetition
+        && x[4 as usize] == x[5 as usize]
+        && x[4 as usize] != x[3 as usize]{
+            repetition = true;
+        }
+    }
+
+    if ordered && repetition{
+        return true;
+    }
+
+    return false;
+}
+
 /// Solves puzzle 041
 ///
 /// Takes two integers representing low and high bounds as input and returns the
@@ -78,6 +148,26 @@ pub fn puzzle01(bound_low: u64, bound_high: u64) -> u64{
 
     for i in bound_low..bound_high{
         if valid(to_array(i)){
+            println!("{}", i);
+            password_count += 1;
+        }
+        let mut temp: u64 = ((i - bound_low) * 100) / (bound_high - bound_low);
+        if temp != progress{
+            progress = temp;
+            println!("[{}%]", progress);
+        }
+    }
+
+    return password_count;
+}
+
+pub fn puzzle02(bound_low: u64, bound_high: u64) -> u64{
+    let result: Vec<u64> = vec![0;6];
+    let mut password_count: u64 = 0;
+    let mut progress: u64 = 0;
+
+    for i in bound_low..bound_high{
+        if valid2(to_array(i)){
             println!("{}", i);
             password_count += 1;
         }
