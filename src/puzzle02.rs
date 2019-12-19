@@ -32,6 +32,7 @@ fn open_file(path: &str) -> String{
 ///
 /// Takes a vector of u64s and prints its contents seperated by newlines. Mostly
 /// for debugging purposes.
+#[allow(dead_code)]
 fn display(data: Vec<u64>){
     for i in data.iter(){
         print!("{}\n", i);
@@ -120,7 +121,7 @@ pub fn puzzle022(path: &str, target: u64) -> u64{
     for i in 0..100{
         for j in 0..100{
             print!("{} + {} ", i, j);
-            let mut data = &open_file(path)[..];
+            let data = &open_file(path)[..];
             let mut vec = Vec::new();
             for i in Regex::new(r",").unwrap().split(data){
                 vec.push(i.parse::<u64>().expect("Failed to parse string"));

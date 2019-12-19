@@ -32,34 +32,6 @@ pub struct Grid{
     current_pos: Vec<i64>
 }
 
-/// Finds the largest integer in a string.
-///
-/// Finds and returns the largest integer value found in a string contained in a
-/// file passed to this function as an argument.
-pub fn largestValue(path: &str) -> i64{
-    let mut input = File::open(path)
-      .expect("largestValue failed to open input file");
-    let mut input_buffer = String::new();
-    let mut largest: i64 = 0;
-
-    input
-      .read_to_string(&mut input_buffer)
-      .expect("Failed to read from input file");
-    
-    // Separates the string into a list of integers to be iterated through.
-    for i in Regex::new(r"\d+").unwrap().captures_iter(&input_buffer[..]){
-        for j in i[0].lines(){
-            let value: i64 = j.parse::<i64>()
-              .expect("Failed converting &str to int in largestValue()");
-            if value > largest{
-                largest = value;
-            }
-        }
-    }
-
-    return largest;
-}
-
 impl Grid{
     /// Constructor
     pub fn grid() -> Grid{
@@ -68,14 +40,6 @@ impl Grid{
             current_pos: vec![0; 2]
         };
         return grid;
-    }
-
-    /// Returns this Grid's current_pos.
-    ///
-    /// Returns the current position of this grid's wire as an integer array
-    /// length 2.
-    pub fn get_pos(&self) -> Vec<i64>{
-        return vec![self.current_pos[0], self.current_pos[1]];
     }
 
     /// Adds another move to this Grid's wire.
@@ -187,7 +151,7 @@ impl Grid{
     /// returns the overall best as an integer.
     fn compare(grid1: &Grid, grid2: &Grid) -> i64{
         let mut best: i64 = 0;
-        for (i, j) in &grid1.wires{
+        for (i, _) in &grid1.wires{
             if grid2.wires.contains_key(i){
                 if best == 0 || ((i[0].abs() + i[1].abs()) < best && (i[0].abs() + i[1].abs()) != 0){
                     best = i[0].abs() + i[1].abs();
@@ -211,20 +175,11 @@ impl Grid{
                 println!("Intersection @ {}, {}", i[0], i[1]);
                 if (i[0] != 0 || i[1] != 0) && ((j + grid2.wires.get(i).unwrap() < best) || best == 0){
                     println!("New best: {} & {}", j, grid2.wires.get(i).unwrap());
-                    best = (j + grid2.wires.get(i).unwrap());
+                    best = j + grid2.wires.get(i).unwrap();
                 }
             }
         }
         return best;
-    }
-
-    /// Prints a Grid line by line
-    ///
-    /// Displays a Grid, mostly for debugging purposes.
-    pub fn display(&self){
-        for i in &self.wires{
-            println!("{}, {} : {}", i.0[0], i.0[1], i.1);
-        }
     }
 }
 
@@ -241,15 +196,14 @@ pub fn puzzle2(path: &str) -> i64{
     let mut input = File::open(path)
       .expect("Grid::puzzle1() failed to open input file");
     let mut input_buffer = String::new();
-    let mut largest: i64 = 0;
 
     input
       .read_to_string(&mut input_buffer)
       .expect("Failed to read from input file");
     
     let mut wire_instructions: std::str::Lines = input_buffer.lines();
-    let mut wire1: &str = wire_instructions.next().unwrap();
-    let mut wire2: &str = wire_instructions.next().unwrap();
+    let wire1: &str = wire_instructions.next().unwrap();
+    let wire2: &str = wire_instructions.next().unwrap();
 
     println!("Building first wire...");
     grid1.execute(wire1);
@@ -274,15 +228,14 @@ pub fn puzzle1(path: &str) -> i64{
     let mut input = File::open(path)
       .expect("Grid::puzzle1() failed to open input file");
     let mut input_buffer = String::new();
-    let mut largest: i64 = 0;
 
     input
       .read_to_string(&mut input_buffer)
       .expect("Failed to read from input file");
     
     let mut wire_instructions: std::str::Lines = input_buffer.lines();
-    let mut wire1: &str = wire_instructions.next().unwrap();
-    let mut wire2: &str = wire_instructions.next().unwrap();
+    let wire1: &str = wire_instructions.next().unwrap();
+    let wire2: &str = wire_instructions.next().unwrap();
 
     println!("Building first wire...");
     grid1.execute(wire1);

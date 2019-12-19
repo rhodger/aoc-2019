@@ -149,7 +149,6 @@ fn valid2(x: [u64; 6]) -> bool{
 /// Takes two integers representing low and high bounds as input and returns the
 /// amount of valid values between these that exist. Takes a long time to run.
 pub fn puzzle01(bound_low: u64, bound_high: u64) -> u64{
-    let result: Vec<u64> = vec![0;6];
     let mut password_count: u64 = 0;
     let mut progress: u64 = 0;
 
@@ -158,7 +157,7 @@ pub fn puzzle01(bound_low: u64, bound_high: u64) -> u64{
             println!("{}", i);
             password_count += 1;
         }
-        let mut temp: u64 = ((i - bound_low) * 100) / (bound_high - bound_low);
+        let temp: u64 = ((i - bound_low) * 100) / (bound_high - bound_low);
         if temp != progress{
             progress = temp;
             println!("[{}%]", progress);
@@ -173,7 +172,6 @@ pub fn puzzle01(bound_low: u64, bound_high: u64) -> u64{
 /// Takes two integers representing low and high bounds as input and returns the
 /// amount of valid values between these that exist. Takes a long time to run.
 pub fn puzzle02(bound_low: u64, bound_high: u64) -> u64{
-    let result: Vec<u64> = vec![0;6];
     let mut password_count: u64 = 0;
     let mut progress: u64 = 0;
 
@@ -182,7 +180,7 @@ pub fn puzzle02(bound_low: u64, bound_high: u64) -> u64{
             println!("{}", i);
             password_count += 1;
         }
-        let mut temp: u64 = ((i - bound_low) * 100) / (bound_high - bound_low);
+        let temp: u64 = ((i - bound_low) * 100) / (bound_high - bound_low);
         if temp != progress{
             progress = temp;
             println!("[{}%]", progress);
