@@ -69,7 +69,7 @@ fn to_array(x: u64) -> [u64; 6]{
     return out;
 }
 
-/// Checks if a number is valid
+/// Checks if a number is valid for task 1
 ///
 /// Tests an array representing a 6 digit number to see if it is valid according
 /// to puzzle 041 rules. This function is designed to work in tandem with
@@ -95,6 +95,13 @@ fn valid(x: [u64; 6]) -> bool{
     return false;
 }
 
+/// Checks if a number is valid for task 2
+///
+/// Tests an array representing a 6 digit number to see if it is valid according
+/// to puzzle 042 rules. This function is designed to work in tandem with
+/// to_array as it requires the integer to split into an array of its digits,
+/// which must be length 6. Returns a boolean representing whether the integer
+/// passed the test.
 fn valid2(x: [u64; 6]) -> bool{
     let mut repetition: bool = false;
     let mut ordered: bool = true;
@@ -161,6 +168,10 @@ pub fn puzzle01(bound_low: u64, bound_high: u64) -> u64{
     return password_count;
 }
 
+/// Solves puzzle 042
+///
+/// Takes two integers representing low and high bounds as input and returns the
+/// amount of valid values between these that exist. Takes a long time to run.
 pub fn puzzle02(bound_low: u64, bound_high: u64) -> u64{
     let result: Vec<u64> = vec![0;6];
     let mut password_count: u64 = 0;
