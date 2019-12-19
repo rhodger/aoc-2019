@@ -72,6 +72,9 @@ fn main() {
         println!("Higher bound defaulting to 999999");
       }
 
-      println!("{}", puzzle04::puzzle04(lower_bound, higher_bound));
+      println!("{}", puzzle04::puzzle01(lower_bound, higher_bound));
+    }else{
+        // Debug for puzzle 04
+        println!("{}", puzzle04::puzzle02(165432,707912));
     }
 }
