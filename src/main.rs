@@ -23,6 +23,16 @@ fn main() {
                                 .short("p")
                                 .value_name("Path to file")
                                 .help("Sets the input file to use"))
+                          .arg(Arg::with_name("LOWBOUND")
+                            .long("low")
+                            .value_name("low_bound")
+                            .help("Lower bound")
+                            .short("l"))
+                          .arg(Arg::with_name("HIGHBOUND")
+                            .long("high")
+                            .value_name("high_bound")
+                            .help("Higher bound")
+                            .short("hi"))
                           .get_matches();
     
     if matches.value_of("PUZZLE").unwrap() == "01"{
@@ -50,8 +60,21 @@ fn main() {
         .value_of("FILE")
         .unwrap_or("./content/input031.txt");
       print!("{}\n", puzzle03::puzzle2(path));
+    }else if matches.value_of("PUZZLE").unwrap() == "041"{
+      let lower_bound: u64 = matches.value_of("LOWBOUND").unwrap_or("111111").parse::<u64>().unwrap();
+      let higher_bound: u64 = matches.value_of("HIGHBOUND").unwrap_or("999999").parse::<u64>().unwrap();
+
+      if lower_bound == 111111{
+        println!("Lower bound defaulting to 111111");
+      }
+
+      if higher_bound == 999999{
+        println!("Higher bound defaulting to 999999");
+      }
+
+      println!("{}", puzzle04::puzzle04(lower_bound, higher_bound));
     }else{
         // Debug for puzzle 04
-        puzzle04::puzzle04(0,10);
+        println!("{}", puzzle04::puzzle04(165432,707912));
     }
 }
