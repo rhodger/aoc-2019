@@ -32,7 +32,7 @@ fn valid(x: [u64; 6]) -> bool{
     return false;
 }
 
-pub fn puzzle04(bound_low: u64, bound_high: u64) -> u64{
+pub fn puzzle01(bound_low: u64, bound_high: u64) -> u64{
     let result: Vec<u64> = vec![0;6];
     let mut password_count: u64 = 0;
     let mut progress: u64 = 0;
