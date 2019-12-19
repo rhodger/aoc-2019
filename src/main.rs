@@ -73,8 +73,5 @@ fn main() {
       }
 
       println!("{}", puzzle04::puzzle04(lower_bound, higher_bound));
-    }else{
-        // Debug for puzzle 04
-        println!("{}", puzzle04::puzzle04(165432,707912));
     }
 }
