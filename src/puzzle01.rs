@@ -8,6 +8,29 @@ use std::fs::File;
 use std::io::prelude::*;
 use regex::Regex;
 
+#[cfg(test)]
+mod tests{
+    use super::*;
+
+    #[test]
+    fn test_process(){
+        assert_eq!(process(12), 2);
+        assert_eq!(process(14), 2);
+        assert_eq!(process(1969), 654);
+        assert_eq!(process(100756), 33583);
+    }
+
+    #[test]
+    fn test_fuel_for(){
+        assert_eq!(fuel_for(654), (966 - 654));
+    }
+
+    #[test]
+    fn test_combined(){
+        assert_eq!(process(1969) + fuel_for(process(1969)), 966);
+    }
+}
+
 /// Returns the fuel required for an object.
 /// 
 /// Returns the fuel required minus the fuel neccessary for that fuel (and so
