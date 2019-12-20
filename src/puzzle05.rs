@@ -21,6 +21,11 @@ mod tests{
     fn test_constructor(){
         let mut comp: Comp = Comp::comp("./content/input051.txt");
     }
+
+    #[test]
+    fn test_add(){
+        //TODO: test_add()
+    }
 }
 
 pub struct Comp{
@@ -48,5 +53,16 @@ impl Comp{
         }
 
         self.mem = out;
+    }
+
+    fn add(&mut self, opcode: i64, x: i64, y: i64, z: i64){
+        let s_opcode: &str = format!("{:0>5}", opcode.to_string());
+        let x_value: i64 = 0;
+
+        if s_opcode[0] == '0'{
+            x_value = self.mem[x];
+        }else{
+            x_value = x;
+        }
     }
 }
