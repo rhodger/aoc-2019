@@ -25,9 +25,52 @@ mod tests{
     #[test]
     fn test_add(){
         let mut comp: Comp = Comp::comp("./content/input051.txt");
-		comp.add(01102, 2, 2, 0);
+
+		comp.add(01101, 2, 2, 0);
+		println!("2 + 2 = {}", comp.mem[0]);
 		assert_eq!(comp.mem[0], 4);
+
+		comp.add(00001, 1, 2, 0);
+		assert_eq!(comp.mem[0], 226);
+
+		comp.add(01101, 2, -1, 0);
+		assert_eq!(comp.mem[0], 1);
     }
+
+	#[test]
+	fn test_sub(){
+        let mut comp: Comp = Comp::comp("./content/input051.txt");
+
+		comp.sub(01198, 8, 3, 0);
+		println!("{} - {} = {}", 8, 3, comp.mem[0]);
+		assert_eq!(comp.mem[0], 5);
+
+		comp.sub(00098, 1, 2, 0);
+		println!("{} - {} = {}", comp.mem[1], comp.mem[2], comp.mem[0]);
+		assert_eq!(comp.mem[0], 224);
+
+		comp.sub(01198, 2, -1, 0);
+		println!("{} - {} = {}", 2, -1, comp.mem[0]);
+		assert_eq!(comp.mem[0], 3);
+	}
+
+	#[test]
+	fn test_mul(){
+    	let mut comp: Comp = Comp::comp("./content/input051.txt");
+
+		comp.mul(01102, 2, 3, 0);
+		println!("{} * {} = {}", 2, 3, comp.mem[0]);
+		assert_eq!(comp.mem[0], 6);
+
+		comp.mul(00002, 4, 5, 0);
+		println!("{} * {} = {}", comp.mem[4], comp.mem[5], comp.mem[0]);
+		assert_eq!(comp.mem[0], 36);
+
+		comp.mul(01102, 2, -1, 0);
+		println!("{} * {} = {}", 2, -1, comp.mem[0]);
+		assert_eq!(comp.mem[0], -2);
+	}
+		
 }
 
 pub struct Comp{
@@ -36,9 +79,10 @@ pub struct Comp{
 
 impl Comp{
     pub fn comp(path: &str) -> Comp{
-        let comp: Comp = Comp{
+        let mut comp: Comp = Comp{
             mem: vec![0;0]
         };
+		comp.load(path);
         return comp;
     }
 
@@ -73,4 +117,39 @@ impl Comp{
 
 		self.mem[z as usize] = x_value + y_value;
     }
+
+	fn sub(&mut self, opcode: i64, x: i64, y: i64, z: i64){
+        let s_opcode: &str = &format!("{:0>5}", opcode.to_string());
+        let x_value: i64 = 0;
+
+        let x_value: i64 = match s_opcode.chars().nth(2).unwrap(){
+            '0' => self.mem[x as usize], 
+            _ => x
+        };
+
+		let y_value: i64 = match s_opcode.chars().nth(1).unwrap(){
+			'0' => self.mem[y as usize],
+			_ => y
+		};
+
+		self.mem[z as usize] = x_value - y_value;
+		
+	}
+
+	fn mul(&mut self, opcode: i64, x: i64, y: i64, z: i64){
+        let s_opcode: &str = &format!("{:0>5}", opcode.to_string());
+        let x_value: i64 = 0;
+
+        let x_value: i64 = match s_opcode.chars().nth(2).unwrap(){
+            '0' => self.mem[x as usize], 
+            _ => x
+        };
+
+		let y_value: i64 = match s_opcode.chars().nth(1).unwrap(){
+			'0' => self.mem[y as usize],
+			_ => y
+		};
+
+		self.mem[z as usize] = x_value * y_value;
+	}
 }
