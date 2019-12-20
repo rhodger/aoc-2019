@@ -4,6 +4,7 @@ mod puzzle01;
 mod puzzle02;
 mod puzzle03;
 mod puzzle04;
+mod puzzle05;
 
 /// Handles command-line arguments
 fn main() {
@@ -86,5 +87,8 @@ fn main() {
       }
 
       println!("{}", puzzle04::puzzle02(lower_bound, higher_bound));
+    }else{
+      // Debug for puzzle 05
+      let comp: puzzle05::Comp = puzzle05::Comp::comp("input012.txt");
     }
 }
