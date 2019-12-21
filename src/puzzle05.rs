@@ -70,7 +70,15 @@ mod tests{
 		println!("{} * {} = {}", 2, -1, comp.mem[0]);
 		assert_eq!(comp.mem[0], -2);
 	}
-		
+
+	#[test]
+	fn test_put(){
+		let mut comp: Comp = Comp::comp("./content/input051.txt");
+
+		assert_eq!(comp.put(004, 0), 3);
+		assert_eq!(comp.put(104, 69), 69);
+		assert_eq!(comp.put(104, -9), -9);
+	}
 }
 
 pub struct Comp{
@@ -151,5 +159,16 @@ impl Comp{
 		};
 
 		self.mem[z as usize] = x_value * y_value;
+	}
+
+	fn put(&self, opcode: i64, x: i64) -> i64{
+        let s_opcode: &str = &format!("{:0>3}", opcode.to_string());
+		let x_value: i64 = match s_opcode.chars().nth(0).unwrap(){
+			'0' => self.mem[x as usize],
+			_ => x
+		};
+
+		println!("{}", x_value);
+		return x_value;
 	}
 }
