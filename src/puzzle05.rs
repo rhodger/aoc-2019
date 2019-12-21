@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 use regex::Regex;
+use std::io;
 
 #[cfg(test)]
 mod tests{
@@ -78,6 +79,21 @@ mod tests{
 		assert_eq!(comp.put(004, 0), 3);
 		assert_eq!(comp.put(104, 69), 69);
 		assert_eq!(comp.put(104, -9), -9);
+	}
+	
+	#[test]
+	#[ignore]
+	fn test_get(){
+		let mut comp: Comp = Comp::comp("./content/input051.txt");
+
+		println!("Enter 69");
+		assert_eq!(comp.get(003, 0), 69);
+
+		println!("Enter 420");
+		assert_eq!(comp.get(003, 0), 420);
+
+		println!("Enter -9");
+		assert_eq!(comp.get(003, 0), -9);
 	}
 }
 
@@ -170,5 +186,22 @@ impl Comp{
 
 		println!("{}", x_value);
 		return x_value;
+	}
+
+	fn get(&mut self, opcode: i64, z: i64) -> i64{
+		let mut input_text = String::new();
+		
+		io::stdin()
+			.read_line(&mut input_text)
+			.expect("failed to read from stdin");
+
+		let trimmed = input_text.trim();
+		let z_value = match trimmed.parse::<i64>() {
+			Ok(i) => i,
+			Err(..) => panic!("Non-integer input")
+		};
+
+		self.mem[z as usize] = z_value;
+		return z_value;
 	}
 }
