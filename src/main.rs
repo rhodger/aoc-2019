@@ -89,6 +89,7 @@ fn main() {
       println!("{}", puzzle04::puzzle02(lower_bound, higher_bound));
     }else{
       // Debug for puzzle 05
-      let comp: puzzle05::Comp = puzzle05::Comp::comp("input012.txt");
+      let mut comp: puzzle05::Comp = puzzle05::Comp::comp("./content/input051.txt");
+	  comp.execute();
     }
 }

@@ -95,6 +95,16 @@ mod tests{
 		println!("Enter -9");
 		assert_eq!(comp.get(003, 0), -9);
 	}
+
+	#[test]
+	fn test_execute(){
+		let mut comp: Comp = Comp::comp("./content/test_input0510.txt");
+
+		println!("Running example test_input051.txt");
+		comp.execute();
+		assert_eq!(comp.mem[4], 99);
+		
+	}
 }
 
 pub struct Comp{
@@ -126,6 +136,7 @@ impl Comp{
     }
 
     fn add(&mut self, opcode: i64, x: i64, y: i64, z: i64){
+		println!("Adding");
         let s_opcode: &str = &format!("{:0>5}", opcode.to_string());
         let x_value: i64 = 0;
 
@@ -143,6 +154,7 @@ impl Comp{
     }
 
 	fn sub(&mut self, opcode: i64, x: i64, y: i64, z: i64){
+		println!("Subtracting");
         let s_opcode: &str = &format!("{:0>5}", opcode.to_string());
         let x_value: i64 = 0;
 
@@ -161,6 +173,7 @@ impl Comp{
 	}
 
 	fn mul(&mut self, opcode: i64, x: i64, y: i64, z: i64){
+		println!("Multiplying");
         let s_opcode: &str = &format!("{:0>5}", opcode.to_string());
         let x_value: i64 = 0;
 
@@ -178,6 +191,7 @@ impl Comp{
 	}
 
 	fn put(&self, opcode: i64, x: i64) -> i64{
+		println!("Putting");
         let s_opcode: &str = &format!("{:0>3}", opcode.to_string());
 		let x_value: i64 = match s_opcode.chars().nth(0).unwrap(){
 			'0' => self.mem[x as usize],
@@ -189,6 +203,8 @@ impl Comp{
 	}
 
 	fn get(&mut self, opcode: i64, z: i64) -> i64{
+		println!("Getting");
+        let s_opcode: &str = &format!("{:0>3}", opcode.to_string());
 		let mut input_text = String::new();
 		
 		io::stdin()
@@ -203,5 +219,51 @@ impl Comp{
 
 		self.mem[z as usize] = z_value;
 		return z_value;
+	}
+
+	pub fn execute(&mut self){
+		let mut pos: i64 = 0;
+
+		while pos < self.mem.len() as i64{
+			if self.mem[pos as usize].to_string().chars().rev().nth(0).unwrap()
+			== '1'{
+				self.add(
+				  self.mem[pos as usize],
+				  self.mem[(pos + 1) as usize],
+				  self.mem[(pos + 2) as usize],
+				  self.mem[(pos + 3) as usize]
+				);
+				pos += 4;
+			}else if self.mem[pos as usize].to_string().chars().rev().nth(0)
+			  .unwrap() == '2'{
+				self.mul(
+				  self.mem[pos as usize],
+				  self.mem[(pos + 1) as usize],
+				  self.mem[(pos + 2) as usize],
+				  self.mem[(pos + 3) as usize]
+				);
+				pos += 4;
+			}else if self.mem[pos as usize].to_string().chars().rev().nth(0)
+			  .unwrap() == '3'{
+				self.get(
+				  self.mem[pos as usize],
+				  self.mem[(pos + 1) as usize]
+				);
+				pos += 2;
+			}else if self.mem[pos as usize].to_string().chars().rev().nth(0)
+			  .unwrap() == '4'{
+				self.put(
+				  self.mem[pos as usize],
+				  self.mem[(pos + 1) as usize]
+				);
+				pos += 2;
+			}else if self.mem[pos as usize].to_string().chars().rev().nth(0)
+			  .unwrap() == '9'{
+				pos = self.mem.len() as i64;
+			}else{
+				println!("Invalid instruction at {}; skipping", pos);
+				pos += 1;
+			}
+		}
 	}
 }
